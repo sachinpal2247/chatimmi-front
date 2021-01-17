@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import Signup from '../Components/auth/Signup';
 import Home from '../Components/Home/Home';
 import Footer from '../Layout/Footer';
 import Header from '../Layout/Header';
@@ -19,8 +20,8 @@ class Routes extends Component {
             <>
             <Header />
             <Switch>
-                
-                <Route path="/" component={Home} />
+                <Route exact path="/" component={Home} />
+                <Route exact path="/signup" component={Signup} />
             </Switch>
             <Footer />
             </>

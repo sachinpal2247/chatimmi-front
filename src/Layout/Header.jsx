@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 
 class Header extends Component{
     constructor(props){
@@ -39,7 +40,7 @@ class Header extends Component{
                       </ul>
                       <div className="nav-btn signup-btn">
                         <a href="javascript:void(0);" className="loginBtn" data-toggle="modal" data-target="#exampleModal">Log In</a>
-                        <a href="/signup" className="signupBtn">Sign Up</a>
+                        <NavLink to="/signup" className="signupBtn">Sign Up</NavLink>
                         {/* <a href="#" class="" data-toggle="modal" data-target="#SignUpModal">Get Started</a> */}
                       </div>
                     </div>
