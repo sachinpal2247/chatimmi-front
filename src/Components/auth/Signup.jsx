@@ -1,17 +1,72 @@
 import { Component } from 'react';
+import profileuser from "../../assets/website/images/profile-user.png"
+import schoolbuilding from "../../assets/website/images/school-building.png"
+import rating from "../../assets/website/images/rating.png"
+import user from "../../assets/website/images/user-acnt-icn.png"
+import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Redirect } from 'react-router-dom';
+import ReactSession from 'react-client-session';
+
 
 class Signup extends Component{
     constructor(props){
       super(props)
 
       this.state = {
-
+        full_name:'',
+        email:'',
+        password:'',
+        confirm_password:'',
+        user_type:"1"
       }
+      // this.getValue = this.state.bind(this.getValue);
+      this.getValue = this.getValue.bind(this);
+      this.submitData = this.submitData.bind(this);
+    }
+    getValue = (event)=>{
+  
+      this.setState({[event.target.name]:event.target.value});
+    }
+
+    //submit data
+    submitData = (e)=>{
+
+      e.preventDefault();
+      console.log(this.state);
+        axios( {
+          "method": "post",
+          "url": "http://70.54.131.186:3000/api/v1/auth/signup",
+          "data": this.state,
+          "headers": { "device-id":'jfgjfjgjk',
+          "device-token":"fsdgg",
+          "device-type":3,
+          "timezone":'01-01-2021' }
+
+        } ).then( ( response ) => {            
+              
+              toast(response.data.message)
+              this.props.history.push('/profile')
+            
+        } ).catch( ( error ) => {
+          if(error.response!==undefined){
+            toast(error.response.data.message)
+            if(error.response.data.error_details!==undefined && error.response.data.error_details.length >=1){
+              error.response.data.error_details.map((value)=>{
+                toast(value.message)
+              })
+            }
+          }
+
+        } );
+
     }
 
     render(){
       return (
         <>
+        <ToastContainer />
         <section className="signupSec">
         <div className="container-fluid">
           <div className="row justify-content-center lsRow">
@@ -27,7 +82,7 @@ class Signup extends Component{
                     <label>
                       <input type="radio" name="usType" defaultChecked defaultValue="userForm" />
                       <div className="usInfo">
-                        <img src="/public/assets/website/images/profile-user.png" />
+                        <img src={profileuser} />
                         <h2>User</h2>
                       </div>
                     </label>
@@ -36,7 +91,7 @@ class Signup extends Component{
                     <label>
                       <input type="radio" name="usType" defaultValue="schoolForm" />
                       <div className="usInfo">
-                        <img src="/public/assets/website/images/school-building.png" />
+                        <img src={schoolbuilding} />
                         <h2>Study</h2>
                       </div>
                     </label>
@@ -45,7 +100,7 @@ class Signup extends Component{
                     <label>
                       <input type="radio" name="usType" defaultValue="expertForm" />
                       <div className="usInfo">
-                        <img src="/public/assets/website/images/rating.png" />
+                        <img src={rating} />
                         <h2>Immigration</h2>
                       </div>
                     </label>
@@ -61,12 +116,12 @@ class Signup extends Component{
 	    						<p>Give us some of your information to get free access to Chatimmi.<p>
 	    					</div> */}
                   <div className="formBox userForm">
-                    <form id="user_signup">
+                    <form id="user_signup" onSubmit={this.submitData} method="post">
                       <div className="row">
                         <div className="col-md-12">
                           <div className="text-center">
                             <div className="upload-pic mb-5">
-                              <img src="/public/assets/website/images/user-acnt-icn.png" id="pImg" />
+                              <img src={user} id="pImg" />
                               <div className="text-center upload-icon">
                                 <input accept="image/*" className="inputfile hideDiv" id="profilePicture" name="profilePicture" onchange="document.getElementById('pImg').src = window.URL.createObjectURL(this.files[0])" style={{display: 'none'}} type="file" />
                                 <label htmlFor="profilePicture" className="upload_pic">
@@ -78,32 +133,32 @@ class Signup extends Component{
                         </div>
                         <div className="col-md-6">
                           <div className="form-group">
-                            <label className="inputLabel">Full Name</label>
-                            <input type="text" name="full_name" id="full_name" className="form-control" placeholder="Enter Name" />
+              <label className="inputLabel">Full Name {this.state.full_name}</label>
+                            <input type="text" name="full_name" id="full_name" className="form-control" placeholder="Enter Name" onChange={this.getValue} />
                           </div>
                         </div>
                         <div className="col-md-6">
                           <div className="form-group">
                             <label className="inputLabel">Email</label>
-                            <input type="text" id="email" name="email" className="form-control" placeholder="Enter Email" />
+                            <input type="text" id="email" name="email" className="form-control" placeholder="Enter Email" onChange={this.getValue}/>
                           </div>
                         </div>
                         <div className="col-md-6">
                           <div className="form-group">
                             <label className="inputLabel">Password</label>
-                            <input type="password" id="password" name="password" className="form-control" placeholder="Enter Password" />
+                            <input type="password" id="password" name="password" className="form-control" placeholder="Enter Password" onChange={this.getValue}/>
                           </div>
                         </div>
                         <div className="col-md-6">
                           <div className="form-group">
                             <label className="inputLabel">Confirm Password</label>
-                            <input type="password" id="confirm_password" name="confirm_password" className="form-control" placeholder="Confirm Password" />
+                            <input type="password" id="confirm_password" name="confirm_password" className="form-control" placeholder="Confirm Password" onChange={this.getValue}/>
                           </div>
                           <input type="hidden" name="user_type" id="user_type" defaultValue={1} />
-                          <input type="hidden" name="_csrf" defaultValue="<%= csrfToken %>" />
+                          <input type="hidden" name="_csrf" />
                         </div>
                         <div className="col-md-12">
-                          <a className="btn btnTheme mt-2" id="userSignupSubmit">Create Account</a>
+                          <button type="submit" className="btn btnTheme mt-2" >Create Account</button>
                         </div>
                       </div>
                     </form>
@@ -116,7 +171,7 @@ class Signup extends Component{
                             <div className="col-md-12">
                               <div className="text-center">
                                 <div className="upload-pic mb-5">
-                                  <img src="/public/assets/website/images/user-acnt-icn.png" id="pImg" />
+                                  <img src={user} id="pImg" />
                                   <div className="text-center upload-icon">
                                     <input accept="image/*" className="inputfile hideDiv" id="file-2" name="profileImage" onchange="document.getElementById('pImg').src = window.URL.createObjectURL(this.files[0])" style={{display: 'none'}} type="file" />
                                     <label htmlFor="file-2" className="upload_pic">
@@ -226,7 +281,7 @@ class Signup extends Component{
                             <div className="col-md-12">
                               <div className="text-center">
                                 <div className="upload-pic mb-5">
-                                  <img src="/public/assets/website/images/user-acnt-icn.png" id="pImg" />
+                                  <img src={user} id="pImg" />
                                   <div className="text-center upload-icon">
                                     <input accept="image/*" className="inputfile hideDiv" id="file-2" name="profileImage" onchange="document.getElementById('pImg').src = window.URL.createObjectURL(this.files[0])" style={{display: 'none'}} type="file" />
                                     <label htmlFor="file-2" className="upload_pic">

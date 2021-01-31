@@ -1,4 +1,28 @@
 import { Component } from 'react';
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
+import slider1 from "../../assets/website/images/slider1.png"
+import slider2 from "../../assets/website/images/slider2.png"
+import slider3 from "../../assets/website/images/slider3.png"
+import profileuser from "../../assets/website/images/profile-user.png"
+import schoolbuilding from "../../assets/website/images/school-building.png"
+import rating from "../../assets/website/images/rating.png"
+import shap2 from "../../assets/website/images/shape2.png"
+import shap4 from "../../assets/website/images/shape4.png"
+import shap5 from "../../assets/website/images/shape5.png"
+import shap6 from "../../assets/website/images/shape6.png"
+import shap7 from "../../assets/website/images/shape7.png"
+
+import saasmobile2 from "../../assets/website/images/saas-mobile2.png"
+import saasmobile1 from "../../assets/website/images/saas-mobile1.png"
+import appstore from "../../assets/website/images/app-store.png"
+import googleplay from "../../assets/website/images/google-play.png"
+
+
+
+
+
+
 
 class Home extends Component{
     constructor(props){
@@ -14,8 +38,8 @@ class Home extends Component{
         <>
           {/* Banner section */}
           <div className="chat-banner-area" id="homeSec">
-            <div className="owl-carousel owl-theme bannerSlider">
-              <div className="item" style={{background: 'url(/public/assets/website/images/slider1.png)'}}>
+            <Carousel className="owl-carousel owl-theme bannerSlider">
+              <div className="item" style={{background: 'url('+slider1+')'}}>
                 <div className="sliderCnt">
                   <div className="container">
                     <div className="chat-banner-content">
@@ -27,7 +51,7 @@ class Home extends Component{
                         <div className="inner-box wow fadeInLeft animated">
                           <div className="content">
                             <div className="icon">
-                              <img src="/public/assets/website/images/profile-user.png" alt="" />
+                              <img src={profileuser} alt="" />
                             </div>
                             <h4>Users</h4>
                             <div className="text">Login as user</div>
@@ -41,7 +65,7 @@ class Home extends Component{
                         <div className="inner-box wow fadeInLeft animated">
                           <div className="content">
                             <div className="icon">
-                              <img src="/public/assets/website/images/school-building.png" alt="" />
+                              <img src={schoolbuilding} alt="" />
                             </div>
                             <h4>Study</h4>
                             <div className="text">Login as study</div>
@@ -55,7 +79,7 @@ class Home extends Component{
                         <div className="inner-box wow fadeInLeft animated">
                           <div className="content">
                             <div className="icon">
-                              <img src="/public/assets/website/images/rating.png" alt="" />
+                              <img src={rating} alt="" />
                             </div>
                             <h4>Immigration</h4>
                             <div className="text">Login as immigration</div>
@@ -67,17 +91,17 @@ class Home extends Component{
                       </div>
                     </div>
                     <div className="chat-shape-content">
-                      <img src="/public/assets/website/images/shape2.png" className="chat-shape-2" alt="Shape" />
-                      <img src="/public/assets/website/images/shape5.png" className="chat-shape-3" alt="Shape" />
-                      <img src="/public/assets/website/images/shape4.png" className="chat-shape-4" alt="Shape" />
-                      <img src="/public/assets/website/images/shape5.png" className="chat-shape-5" alt="Shape" />
-                      <img src="/public/assets/website/images/shape6.png" className="chat-shape-6" alt="Shape" />
-                      <img src="/public/assets/website/images/shape7.png" className="chat-shape-7" alt="Shape" />
+                    <img src={shap2} className="chat-shape-2" alt="Shape" />
+                      <img src={shap5} className="chat-shape-3" alt="Shape" />
+                      <img src={shap4} className="chat-shape-4" alt="Shape" />
+                      <img src={shap5} className="chat-shape-5" alt="Shape" />
+                      <img src={shap6} className="chat-shape-6" alt="Shape" />
+                      <img src={shap7} className="chat-shape-7" alt="Shape" />
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="item" style={{background: 'url(/public/assets/website/images/slider2.png)'}}>
+              <div className="item" style={{background: 'url('+slider2+')'}}>
                 <div className="sliderCnt">
                   <div className="container">
                     <div className="chat-banner-content">
@@ -89,7 +113,7 @@ class Home extends Component{
                         <div className="inner-box wow fadeInLeft animated">
                           <div className="content">
                             <div className="icon">
-                              <img src="/public/assets/website/images/profile-user.png" alt="" />
+                              <img src={profileuser} alt="" />
                             </div>
                             <h4>Users</h4>
                             <div className="text">Login as user</div>
@@ -103,7 +127,7 @@ class Home extends Component{
                         <div className="inner-box wow fadeInLeft animated">
                           <div className="content">
                             <div className="icon">
-                              <img src="/public/assets/website/images/school-building.png" alt="" />
+                              <img src={schoolbuilding} alt="" />
                             </div>
                             <h4>Study</h4>
                             <div className="text">Login as study</div>
@@ -117,7 +141,7 @@ class Home extends Component{
                         <div className="inner-box wow fadeInLeft animated">
                           <div className="content">
                             <div className="icon">
-                              <img src="/public/assets/website/images/rating.png" alt="" />
+                              <img src={rating} alt="" />
                             </div>
                             <h4>Immigration</h4>
                             <div className="text">Login as immigration</div>
@@ -129,17 +153,17 @@ class Home extends Component{
                       </div>
                     </div>
                     <div className="chat-shape-content">
-                      <img src="/public/assets/website/images/shape2.png" className="chat-shape-2" alt="Shape" />
-                      <img src="/public/assets/website/images/shape5.png" className="chat-shape-3" alt="Shape" />
-                      <img src="/public/assets/website/images/shape4.png" className="chat-shape-4" alt="Shape" />
-                      <img src="/public/assets/website/images/shape5.png" className="chat-shape-5" alt="Shape" />
-                      <img src="/public/assets/website/images/shape6.png" className="chat-shape-6" alt="Shape" />
-                      <img src="/public/assets/website/images/shape7.png" className="chat-shape-7" alt="Shape" />
+                    <img src={shap2} className="chat-shape-2" alt="Shape" />
+                      <img src={shap5} className="chat-shape-3" alt="Shape" />
+                      <img src={shap4} className="chat-shape-4" alt="Shape" />
+                      <img src={shap5} className="chat-shape-5" alt="Shape" />
+                      <img src={shap6} className="chat-shape-6" alt="Shape" />
+                      <img src={shap7} className="chat-shape-7" alt="Shape" />
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="item" style={{background: 'url(/public/assets/website/images/slider3.png)'}}>
+              <div className="item" style={{background: 'url('+slider3+')'}}>
                 <div className="sliderCnt">
                   <div className="container">
                     <div className="chat-banner-content">
@@ -151,7 +175,7 @@ class Home extends Component{
                         <div className="inner-box wow fadeInLeft animated">
                           <div className="content">
                             <div className="icon">
-                              <img src="/public/assets/website/images/profile-user.png" alt="" />
+                              <img src={profileuser} alt="" />
                             </div>
                             <h4>Users</h4>
                             <div className="text">Login as user</div>
@@ -165,7 +189,7 @@ class Home extends Component{
                         <div className="inner-box wow fadeInLeft animated">
                           <div className="content">
                             <div className="icon">
-                              <img src="/public/assets/website/images/school-building.png" alt="" />
+                              <img src={schoolbuilding} alt="" />
                             </div>
                             <h4>Study</h4>
                             <div className="text">Login as study</div>
@@ -179,7 +203,7 @@ class Home extends Component{
                         <div className="inner-box wow fadeInLeft animated">
                           <div className="content">
                             <div className="icon">
-                              <img src="/public/assets/website/images/rating.png" alt="" />
+                              <img src={{rating}} alt="" />
                             </div>
                             <h4>Immigration</h4>
                             <div className="text">Login as immigration</div>
@@ -191,17 +215,17 @@ class Home extends Component{
                       </div>
                     </div>
                     <div className="chat-shape-content">
-                      <img src="/public/assets/website/images/shape2.png" className="chat-shape-2" alt="Shape" />
-                      <img src="/public/assets/website/images/shape5.png" className="chat-shape-3" alt="Shape" />
-                      <img src="/public/assets/website/images/shape4.png" className="chat-shape-4" alt="Shape" />
-                      <img src="/public/assets/website/images/shape5.png" className="chat-shape-5" alt="Shape" />
-                      <img src="/public/assets/website/images/shape6.png" className="chat-shape-6" alt="Shape" />
-                      <img src="/public/assets/website/images/shape7.png" className="chat-shape-7" alt="Shape" />
+                      <img src={shap2} className="chat-shape-2" alt="Shape" />
+                      <img src={shap5} className="chat-shape-3" alt="Shape" />
+                      <img src={shap4} className="chat-shape-4" alt="Shape" />
+                      <img src={shap5} className="chat-shape-5" alt="Shape" />
+                      <img src={shap6} className="chat-shape-6" alt="Shape" />
+                      <img src={shap7} className="chat-shape-7" alt="Shape" />
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </Carousel>
           </div>
           {/* Features section */}
           <div className="FeaturesSection" id="fetSec">
@@ -282,18 +306,18 @@ class Home extends Component{
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</p>
                     <div className="app-image">
                       <a href="#">
-                        <img src="/public/assets/website/images/google-play.png" className="play-stroe" alt="Image" />
+                        <img src={googleplay} className="play-stroe" alt="Image" />
                       </a>
                       <a href="#">
-                        <img src="/public/assets/website/images/app-store.png" className="apple" alt="Image" />
+                        <img src={appstore} className="apple" alt="Image" />
                       </a>
                     </div>
                   </div>
                 </div>
                 <div className="col-lg-6">
                   <div className="download-image">
-                    <img src="/public/assets/website/images/saas-mobile1.png" className="mobile-1" alt="Image" />
-                    <img src="/public/assets/website/images/saas-mobile2.png" className="mobile-2" alt="Image" />
+                    <img src={saasmobile1} className="mobile-1" alt="Image" />
+                    <img src={saasmobile2} className="mobile-2" alt="Image" />
                   </div>
                 </div>
               </div>

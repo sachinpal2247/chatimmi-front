@@ -6,10 +6,16 @@
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.0",
+    "axios": "^0.21.1",
     "react": "^17.0.1",
+    "react-client-session": "0.0.7",
     "react-dom": "^17.0.1",
+    "react-redux-toastr": "^7.6.5",
+    "react-responsive-carousel": "^3.2.11",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "react-toastify": "^7.0.2",
+    "react-toastr": "^3.0.0",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
@@ -35,5 +41,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://70.54.131.186:3000/"
 }
