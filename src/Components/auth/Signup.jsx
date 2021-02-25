@@ -19,25 +19,77 @@ class Signup extends Component{
         email:'',
         password:'',
         confirm_password:'',
-        user_type:"1"
+        user_type:"1",
+        schoolDisplay:"none",
+        expertDisplay:"none",
+        userDisplay:"block",
+        imgSrc:user
       }
       // this.getValue = this.state.bind(this.getValue);
       this.getValue = this.getValue.bind(this);
       this.submitData = this.submitData.bind(this);
+      this.changeDisplay = this.changeDisplay.bind(this);
+      this.onchange = this.onchange.bind(this);
+
+
     }
     getValue = (event)=>{
   
       this.setState({[event.target.name]:event.target.value});
     }
 
+    changeDisplay = (event)=>{
+      if(event.target.name=="expert"){
+        this.setState({schoolDisplay: "none"});
+        this.setState({expertDisplay:"block"})
+        this.setState({userDisplay:"none"})
+        this.setState({user_type:"2"})
+      }else if(event.target.name=="school"){
+        this.setState({schoolDisplay:"block"})
+      this.setState({expertDisplay :"none"})
+      this.setState({userDisplay :"none"})
+      this.setState({user_type:"3"})
+
+
+      }else{
+        this.setState({schoolDisplay : "none"})
+        this.setState({expertDisplay :"none"})
+        this.setState({userDisplay : "block"})
+      }
+      
+
+    }
+
+    onchange(event){
+      // Assuming only image
+      console.log(event)
+      // return false
+      var file = event.target.files[0];
+      var reader = new FileReader();
+      var url = reader.readAsDataURL(file);
+    
+       reader.onloadend = function (e) {
+          this.setState({
+              imgSrc: [reader.result],
+          })
+        }.bind(this);
+      console.log(url) // Would see a path?
+      // TODO: concat files
+    };
+    
+
     //submit data
     submitData = (e)=>{
 
       e.preventDefault();
       console.log(this.state);
+      delete this.state.expertDisplay
+      delete this.state.schoolDisplay
+      delete this.state.userDisplay
+
         axios( {
           "method": "post",
-          "url": "http://70.54.131.186:3000/api/v1/auth/signup",
+          "url": "https://chatimmi.net/api/v1/auth/signup",
           "data": this.state,
           "headers": { "device-id":'jfgjfjgjk',
           "device-token":"fsdgg",
@@ -80,7 +132,7 @@ class Signup extends Component{
                 <div className="lsUsTypeSec">
                   <div className>
                     <label>
-                      <input type="radio" name="usType" defaultChecked defaultValue="userForm" />
+                      <input type="radio" name="user" onClick={this.changeDisplay}/>
                       <div className="usInfo">
                         <img src={profileuser} />
                         <h2>User</h2>
@@ -89,7 +141,7 @@ class Signup extends Component{
                   </div>
                   <div className>
                     <label>
-                      <input type="radio" name="usType" defaultValue="schoolForm" />
+                      <input type="radio" name="school" onClick={this.changeDisplay}/>
                       <div className="usInfo">
                         <img src={schoolbuilding} />
                         <h2>Study</h2>
@@ -98,7 +150,7 @@ class Signup extends Component{
                   </div>
                   <div className>
                     <label>
-                      <input type="radio" name="usType" defaultValue="expertForm" />
+                      <input type="radio" name="expert" onClick={this.changeDisplay}/>
                       <div className="usInfo">
                         <img src={rating} />
                         <h2>Immigration</h2>
@@ -115,15 +167,16 @@ class Signup extends Component{
 	    						<h1>Create New Account</h1>
 	    						<p>Give us some of your information to get free access to Chatimmi.<p>
 	    					</div> */}
-                  <div className="formBox userForm">
+                  <div className="formBox userForm" style={{display: this.state.userDisplay}}>
                     <form id="user_signup" onSubmit={this.submitData} method="post">
                       <div className="row">
                         <div className="col-md-12">
                           <div className="text-center">
                             <div className="upload-pic mb-5">
-                              <img src={user} id="pImg" />
+                              <img src={this.state.imgSrc} id="pImg" />
+                              {/* <img src={this.imgSrc} id="pImg1" /> */}
                               <div className="text-center upload-icon">
-                                <input accept="image/*" className="inputfile hideDiv" id="profilePicture" name="profilePicture" onchange="document.getElementById('pImg').src = window.URL.createObjectURL(this.files[0])" style={{display: 'none'}} type="file" />
+                                <input accept="image/*" className="inputfile hideDiv" id="profilePicture" name="profilePicture" onChange={this.onchange} style={{display: 'none'}} type="file" />
                                 <label htmlFor="profilePicture" className="upload_pic">
                                   <span className="fas fa-camera" />
                                 </label>
@@ -163,17 +216,17 @@ class Signup extends Component{
                       </div>
                     </form>
                   </div>
-                  <div className="formBox schoolForm" style={{display: 'none'}}>
+                  <div className="formBox schoolForm" style={{display: this.state.schoolDisplay}}>
                     <form id="expert_signup">
                       <div className="form-wizard">
-                        <fieldset>
+                        <fieldset style={{display: 'block'}}>
                           <div className="row">
                             <div className="col-md-12">
                               <div className="text-center">
                                 <div className="upload-pic mb-5">
-                                  <img src={user} id="pImg" />
+                                  <img src={this.state.imgSrc} id="pImg" />
                                   <div className="text-center upload-icon">
-                                    <input accept="image/*" className="inputfile hideDiv" id="file-2" name="profileImage" onchange="document.getElementById('pImg').src = window.URL.createObjectURL(this.files[0])" style={{display: 'none'}} type="file" />
+                                    <input accept="image/*" className="inputfile hideDiv" id="file-2" name="profileImage" onChange={this.onchange} style={{display: 'none'}} type="file" />
                                     <label htmlFor="file-2" className="upload_pic">
                                       <span className="fas fa-camera" />
                                     </label>
@@ -273,7 +326,7 @@ class Signup extends Component{
                       </div>
                     </form>
                   </div>
-                  <div className="formBox expertForm" style={{display: 'none'}}>
+                  <div className="formBox expertForm" style={{display: this.state.expertDisplay}}>
                     <form id="expert_signup1">
                       <div className="form-wizard">
                         <fieldset style={{display: 'block'}}>
@@ -281,9 +334,9 @@ class Signup extends Component{
                             <div className="col-md-12">
                               <div className="text-center">
                                 <div className="upload-pic mb-5">
-                                  <img src={user} id="pImg" />
+                                  <img src={this.state.imgSrc} id="pImg" />
                                   <div className="text-center upload-icon">
-                                    <input accept="image/*" className="inputfile hideDiv" id="file-2" name="profileImage" onchange="document.getElementById('pImg').src = window.URL.createObjectURL(this.files[0])" style={{display: 'none'}} type="file" />
+                                    <input accept="image/*" className="inputfile hideDiv" id="file-2" name="profileImage" onChange={this.onchange} style={{display: 'none'}} type="file" />
                                     <label htmlFor="file-2" className="upload_pic">
                                       <span className="fas fa-camera" />
                                     </label>
